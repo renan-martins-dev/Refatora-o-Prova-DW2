@@ -25,7 +25,7 @@
                     <input id="busca" type="search" placeholder="Buscar..." autocomplete="off">
                     <button type="submit" aria-label="Pesquisar">Pesquisar</button>
                 </form>
-                <button>Carrinho</button>
+                <button id="botaoCarrinhoCompras">Carrinho</button>
                 <button id="tema" class="theme-button" type="button" aria-label="Alternar tema">☾</button>
             </div>
         </div>
@@ -33,15 +33,9 @@
     <main id="inicio">
         <section class="hero-section container">
             <article class="hero-main">
-                <div class="hero-image-wrapper">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
-                        alt="Placa de circuito eletrônico representando tecnologia">
-                </div>
                 <div class="hero-content">
                     <span class="category technology">TECNOLOGIA</span>
-                    <h1>A nova geração da inteligência artificial está mudando a forma como trabalhamos</h1>
                     <p>Áudio, acessórios e gadgets selecionados com até 30% de desconto. Entrega rápida para todo o país.</p>
-                    
                 </div>
             </article>
         </section>
@@ -66,7 +60,16 @@
             </form>
             <p id="mensagemNewsletter" class="newsletter-message"></p>
         </section>
-        <div id="carrinhoCompras">
+        <div id="carrinhoDeCompras"class="carrinhoCompras">
+            <section>
+                <h3>Carrinho de Compras</h3>
+            </section>
+            <section id="listaProdutos">
+
+            </section>
+            
+        </div>
+        <div id="carrinhoDeComprasOverlay"class="carrinhoComprasOverlay">
 
         </div>
     </main>

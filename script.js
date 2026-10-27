@@ -50,7 +50,11 @@ const botaoTema = document.querySelector("#tema");
 const formNewsletter = document.querySelector("#formNewsletter");
 const campoEmail = document.querySelector("#email");
 const mensagemNewsletter = document.querySelector("#mensagemNewsletter");
+const botaoCarrinhoCompras = document.querySelector("#botaoCarrinhoCompras");
 const carrinhoDeCompras = document.querySelector("#carrinhoDeCompras");
+const listaProdutos = document.querySelector("#listaProdutos");
+const carrinhoDeComprasOverlay = document.querySelector("#carrinhoDeComprasOverlay");
+
 function formatarCategoria(categoria) {
     const nomes = {
         audio: "ÁUDIO",
@@ -67,7 +71,7 @@ function renderizarProdutos(lista) {
         return;
     }
     semResultados.classList.remove("visible");
-    lista.forEach(produto => {
+    lista.forEach((produto) => {
         const novoProduto = document.createElement("article");
         novoProduto.classList.add("card-produto");
         novoProduto.innerHTML = `
@@ -112,7 +116,7 @@ campoBusca.addEventListener("input", event => {
     textoBusca = event.target.value.toLowerCase().trim();
     aplicarFiltros();
 });
-formBusca.addEventListener("submit", event => {
+formBusca.addEventListener("submit", event => {carrinhoDeCompras.classList.toggle("ativo")
     event.preventDefault();
     document.querySelector("#noticias").scrollIntoView({
         behavior: "smooth"
@@ -133,7 +137,7 @@ function abrirCarrinhoDeCompras(){
 }
 
 function renderizarCarrinhoDeCompras() {
-    carrinhoDeCompras.innerHTML = "";
+    listaProdutos.innerHTML = "";
     const produtosCarrinho = localStorage.getItem("carrinho");
     produtosCarrinho.forEach(produto => {
         const novoProduto = document.createElement("article");
@@ -178,9 +182,14 @@ function adicionarProdutoCarrinho(produtoNome) {
     localStorage.setItem("carrinho", listaAtualizada);
     renderizarCarrinhoDeCompras();
 }
-console.log(localStorage.getItem("lista-produtos"));
+
+function ativarClasseAtivo(elemento){
+    elemento.classList.toggle("ativo");    
+}
+
 const temaSalvo = localStorage.getItem("tema");
 if (temaSalvo) {
+
     document.documentElement.dataset.theme = temaSalvo;
 } else {
     const prefereEscuro = window.matchMedia("(prefers-color-scheme: escuro)").matches;
@@ -198,3 +207,15 @@ botaoTema.addEventListener("click", () => {
     localStorage.setItem("tema", novoTema);
     atualizarIconeTema();
 });
+
+botaoCarrinhoCompras.addEventListener("click", ()=> {
+    ativarClasseAtivo(carrinhoDeCompras);
+});
+
+carrinhoDeComprasOverlay.addEventListener("click", ()=> {
+    if(carrinhoDeCompras.classList.contains("ativo"))
+    {
+        carrinhoDeCompras.classList.remove("ativo");
+    }
+});
+renderizarCarrinhoDeCompras();
